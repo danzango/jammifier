@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Keys</title>
+      <meta name="description" content="Trying to arrange items in a circle">
+      <meta name="author" content="dponzio">
+
+      <link href="{% static 'modes/circler.css' %}" rel="stylesheet">
+      <script src="{% static 'modes/modes.js' %}"></script>
+
+    </head>
+
+    <body>
+
+      <div>
+        <h1>What key are you jamming in?</h1>
+        <h3>Click on each key to see what scales you can try out</h3>
+      </div>
+
+      <div>
+          <ul class='circle-container'>
+          <li>A</li>
+          <li>E</li>
+          <li>B</li>
+          <li>F#</li>
+          <li>Db</li>
+          <li>Ab</li>
+          <li>Eb</li>
+          <li>Bb</li>
+          <li>F</li>
+          <li><a href="{% url 'scales' 'C' %}"><img src="{% static 'modes/Cmaj.png' %}"></a></li>
+          <li><a href="{% url 'scales' 'G' %}"><img src="{% static 'modes/Gmaj.png' %}"></a></li>
+          <li>D</li>
+          </ul>
+
+          <ul class='small-circle-container'>
+          <li>f#</li>
+          <li>c#</li>
+          <li>g#</li>
+          <li>d#</li>
+          <li>a#</li>
+          <li>f</li>
+          <li>c</li>
+          <li>g</li>
+          <li>d</li>
+          <li>a</li>
+          <li>e</li>
+          <li>b</li>
+          </ul>
+      </div>
+
+      <footer class="footer">
+        <p>Author: dponzio</p>
+        <p><a href="mailto:ponzio.daniel@gmail.com">ponzio.daniel@gmail.com</a></p>
+      </footer>
+    </body>
+</html>
+
+

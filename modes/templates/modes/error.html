@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <title>Error</title>
+    </head>
+    <body>
+        <img src="{% static 'modes/broken.png' %}" style="width: 25%">
+
+        <h3>Oops!</h3>
+        <h4> Looks like an error happened </h4>
+        <div>
+            {{ message }}
+        </div>
+    </body>
+</html>
