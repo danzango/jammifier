@@ -1,0 +1,123 @@
+{% extends "modes/layout.html" %}
+{% load static %}
+{% block body %}
+
+    <script src="{% static 'modes/tabs.js' %}"></script>
+
+    <header>
+        <p>
+        <h2 id="title">✨ {{ root }} major ✨</h2>
+        <h3>🌧 {{ minor }} minor 🌧 is the relative minor</h3>
+        </p>
+
+        <div class="settings">
+            <label for="instrument-selector"></label>
+            <select name="instrument-selector" id="instrument-selector" class="select-css">
+            </select>
+
+            <div class="display-none">
+                <label for="number-of-frets">Number of frets:</label>
+                <input type="number" id="number-of-frets" min="5" max="30" value="20">
+            </div>
+
+            <label class="checkbox-container" for="show-all-notes">Show all notes
+                <input type="checkbox" id="show-all-notes" class="checkbox">
+                <span class="checkmark"></span>
+            </label>
+
+            <div class="display-none">
+                <label for="show-multiple-notes">Show multiple notes
+                    <input type="checkbox" id="show-multiple-notes" class="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+
+        </div>
+
+        <div id="trackDiv" class="display-none">
+            <iframe id="trackFrame" src="/" width="250px" height="250px" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+
+         <div class="divider">
+            <hr>
+         </div>
+
+        <div data-accidentals="{{ accidentals }}" class="display-none accidentals"></div>
+    </header>
+
+    <div class="flex-container">
+        <div class="scales-div flex-child">
+            <div class="tab">
+              <button class="tablinks" data-scale="ion_scale" onclick="openScale(event, 'Ionian')">Ionian (major/happy)</button>
+              <button class="tablinks" data-scale="dor_scale" onclick="openScale(event, 'Dorian')">Dorian (jazzy)</button>
+              <button class="tablinks" data-scale="phr_scale" onclick="openScale(event, 'Phrygian')">Phrygian (exotic)</button>
+              <button class="tablinks" data-scale="lyd_scale" onclick="openScale(event, 'Lydian')">Lydian (dreamy)</button>
+              <button class="tablinks" data-scale="mix_scale" onclick="openScale(event, 'Mixolydian')">Mixolydian (rock)</button>
+              <button class="tablinks" data-scale="aeo_scale" onclick="openScale(event, 'Aeolian')">Aeolian (minor/sad)</button>
+              <button class="tablinks" data-scale="loc_scale" onclick="openScale(event, 'Locrian')">Locrian (ominous)</button>
+            </div>
+
+            <!-- Tab content -->
+            <div id="Ionian" class="tabcontent">
+              <div class="block_container">Start scale on <div class="starting-note">{{ ion_scale.0 }}</div> on the 6th string</div>
+              <p class="display-none" id="ion_scale">{{ ion_scale }}</p>
+            </div>
+
+            <div id="Dorian" class="tabcontent">
+              <div class="block_container">Start scale on <div class="starting-note">{{ ion_scale.1 }}</div> on the 6th string</div>
+              <p class="display-none" id="dor_scale">{{ dor_scale }}</p>
+            </div>
+
+            <div id="Phrygian" class="tabcontent">
+              <div class="block_container">Start scale on <div class="starting-note">{{ ion_scale.2 }}</div> on the 6th string</div>
+              <p class="display-none" id="phr_scale">{{ phr_scale }}</p>
+            </div>
+
+            <div id="Lydian" class="tabcontent">
+              <div class="block_container">Start scale on <div class="starting-note">{{ ion_scale.3 }}</div> on the 6th string</div>
+              <p class="display-none" id="lyd_scale">{{ lyd_scale }}</p>
+            </div>
+
+            <div id="Mixolydian" class="tabcontent">
+              <div class="block_container">Start scale on <div class="starting-note">{{ ion_scale.4 }}</div> on the 6th string</div>
+              <p class="display-none" id="mix_scale">{{ mix_scale }}</p>
+            </div>
+
+            <div id="Aeolian" class="tabcontent">
+              <div class="block_container">Start scale on <div class="starting-note">{{ ion_scale.5 }}</div> on the 6th string</div>
+              <p class="display-none" id="aeo_scale">{{ aeo_scale }}</p>
+            </div>
+
+            <div id="Locrian" class="tabcontent">
+              <div class="block_container">Start scale on <div class="starting-note">{{ ion_scale.6 }}</div> on the 6th string</div>
+              <p class="display-none" id="loc_scale">{{ loc_scale }}</p>
+            </div>
+
+            <div class="fretboard"></div>
+            <script src="{% static 'modes/fretboard.js' %}"></script>
+        </div>
+
+        <div class="chords-div flex-child">
+            <div class="chord-grid">
+                <div class="chord-selector chord-grid">
+                    <p>Classic Chords</p>
+                    {% for chord in classic_chords %}
+                        <button class="chord-button" data-notes="{{ chord.notes }}">{{ chord.shorthand }}</button>
+                    {% endfor %}
+                </div>
+                <div class="chord-selector chord-grid">
+                    <p>Jazz Chords</p>
+                    {% for jazz_chord in jazz_chords %}
+                        <button class="chord-button" data-notes="{{ jazz_chord.notes }}">{{ jazz_chord.shorthand }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <br>
+        <a href="{% url 'index' %}" class="button">Back to home page</a>
+    </div>
+
+{% endblock %}

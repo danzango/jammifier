@@ -1,0 +1,68 @@
+﻿{% extends "modes/layout.html" %}
+{% load static %}
+{% block body %}
+
+    <header>
+        <p>
+        <h2>🎸 Jammifier</h2>
+        </p>
+    </header>
+
+    <div class="divider">
+        <hr>
+    </div>
+
+    <div class="flex-container">
+
+        <div class="search-div flex-index">
+            <div>
+                <div><h3>Search for a song or select a key 🎶</h3></div>
+                <form autocomplete="off"><input class="search-box" type="text" name="q" id="q" onKeyUp="returnedFunction(this.value)" />
+                <div id="result"></div>
+                <div id="loading" class="display-none"><img src="https://i.imgur.com/fpaTRfD.gif"></div>
+                </form>
+            </div>
+        </div>
+        <script src="{% static 'modes/search.js' %}"></script>
+
+        <div class="wheel-div flex-index">
+            <div id='piemenu' data-wheelnav
+                 data-wheelnav-slicepath='DonutSlice'
+                 data-wheelnav-rotateoff
+                 data-wheelnav-navangle='270'
+                 data-wheelnav-cssmode
+                 data-wheelnav-init>
+                  <div data-wheelnav-navitemtext='C' onmouseup='window.location.href = window.location.href + "scales/C"'><div>a minor</div></div>
+                  <div data-wheelnav-navitemtext='G' onmouseup='window.location.href = window.location.href + "scales/G"'></div>
+                  <div data-wheelnav-navitemtext='D' onmouseup='window.location.href = window.location.href + "scales/D"'></div>
+                  <div data-wheelnav-navitemtext='A' onmouseup='window.location.href = window.location.href + "scales/A"'></div>
+                  <div data-wheelnav-navitemtext='E' onmouseup='window.location.href = window.location.href + "scales/E"'></div>
+                  <div data-wheelnav-navitemtext='B' onmouseup='window.location.href = window.location.href + "scales/B"'></div>
+                  <div data-wheelnav-navitemtext='G♭/F♯' onmouseup='window.location.href = window.location.href + "scales/Gb"'></div>
+                  <div data-wheelnav-navitemtext='D♭' onmouseup='window.location.href = window.location.href + "scales/Db"'></div>
+                  <div data-wheelnav-navitemtext='A♭' onmouseup='window.location.href = window.location.href + "scales/Ab"'></div>
+                  <div data-wheelnav-navitemtext='E♭' onmouseup='window.location.href = window.location.href + "scales/Eb"'></div>
+                  <div data-wheelnav-navitemtext='B♭' onmouseup='window.location.href = window.location.href + "scales/Bb"'></div>
+                  <div data-wheelnav-navitemtext='F' onmouseup='window.location.href = window.location.href + "scales/F"'></div>
+                </div>
+
+                <script type="text/javascript">
+                window.onload = () => {
+                    var piemenu = new wheelnav('piemenu');
+                    piemenu.clockwise = false;
+                    piemenu.sliceInitPathFunction = piemenu.slicePathFunction;
+                    piemenu.initPercent = 0.1;
+                    piemenu.wheelRadius = piemenu.wheelRadius * 0.83;
+                    piemenu.createWheel();
+                };
+                </script>
+        </div>
+
+    </div>
+
+
+    <footer>
+        <p>&copy; 2021 Daniel Ponzio</p>
+        <p>Pie menu made using <a href="http://wheelnavjs.softwaretailoring.net/index.html">wheelnav.js</a></p>
+    </footer>
+{% endblock %}

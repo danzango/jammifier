@@ -1,0 +1,588 @@
+/*Variables start here*/
+:root {
+    --fretboard-height: 300;
+    --number-strings: 6;
+    --string-height: 10;
+    --half-string-height: calc(var(--string-height) / 2);
+    --string-top-position: calc(var(--fretboard-height) / var(--number-strings) / 2 - var(--half-string-height));
+    --double-fretmark-position-1: calc(var(--fretboard-height) / 6);
+    --note-opacity: 0;
+    --fret-before-background: #63B7B7;
+    --titles-color: #272838;
+    --main-color: #89b0ae;
+    --background-color: #faf9f9;
+    --wheel-color: #bee3db;
+    --dark-accents-color: #555b6e;
+}
+
+/*General styling starts here*/
+header {
+    font-size: x-large;
+    text-align: center;
+    background-color: var(--background-color);
+    color: var(--titles-color);
+    padding: 1px;
+    font-family: Tahoma, sans-serif;
+    margin-bottom: 25px;
+}
+
+header a {
+    background-color: #ddd;
+    color: #555;
+    text-decoration: none;
+    padding: 0 3px 0 3px;
+}
+
+header a:hover {
+    background-color: #555;
+    color: #ddd;
+    text-decoration: underline;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: Arial, Arial, sans-serif;
+    margin-bottom: -35px;
+}
+
+footer {
+    text-align: center;
+    background-color: var(--dark-accents-color);
+    color: var(--background-color);
+    padding: 2px;
+    margin-top: 50px;
+    margin-bottom: 0%;
+}
+
+.footer,
+.push {
+  height: 35px;
+}
+
+footer a {
+    background-color: var(--main-color);
+    color: var(--background-color);
+    text-decoration: none;
+    padding: 0 3px 0 3px;
+}
+
+footer a:hover {
+    background-color: #555;
+    color: #ddd;
+    text-decoration: underline;
+}
+
+/*Pie menu styling*/
+#piemenu > svg { width: 100%; height: 100%; }
+#piemenu { height: 750px; width: 750px; margin:auto; font-size: 30px; }
+@media (max-width: 400px) { #piemenu { height: 300px; width: 300px; } }
+
+[class|=wheelnav-piemenu-slice-basic] { fill: var(--wheel-color); stroke: none; border: 1px;}
+[class|=wheelnav-piemenu-slice-selected] { fill: var(--wheel-color); stroke: none; }
+[class|=wheelnav-piemenu-slice-hover] { fill: var(--wheel-color);  stroke: none; fill-opacity: 0.77; cursor: pointer; }
+
+[class|=wheelnav-piemenu-title-basic] { fill: #333; stroke: none; }
+[class|=wheelnav-piemenu-title-selected] { fill: #fff; stroke: none; }
+[class|=wheelnav-piemenu-title-hover] { fill: #222; stroke: none; cursor: pointer; }
+[class|=wheelnav-piemenu-title] > tspan {
+  font-family: Tahoma, Charcoal, sans-serif;
+  font-size: 30px;
+  font-weight: bold
+}
+
+/* Tab styling starts here */
+.tab {
+  overflow: hidden;
+  border: none;
+  background-color: var(--background-color);
+  text-align: center;
+}
+
+/* Style the buttons that are used to open the tab content */
+.button, .tab button {
+    background-color: var(--main-color);
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 20px;
+    transition: 0.3s;
+    text-align: center;
+    color: var(--background-color);
+    font-size: 17px;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: var(--dark-accents-color);
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: none;
+  border-top: none;
+  font-family: Tahoma, sans-serif;
+  color:floral
+}
+
+form {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+/*Fretboard styling starts here*/
+
+.fretboard {
+    display: flex;
+    flex-direction: column;
+    background: #F1C38E;
+    width: 100%;
+    height: calc(var(--fretboard-height) * 1px);
+    margin-top: 15px;
+}
+
+.string {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+
+.string:before {
+  content: '';
+  width: 100%;
+  height: calc(var(--string-height) * 1px);
+  background: linear-gradient(#eee, #999);
+  box-shadow: 76px 3px 10px #80623;
+  z-index: 1;
+  position: absolute;
+  top: 22px;
+  top: calc(var(--string-top-position) * 1px);
+}
+
+.note-fret {
+  display: flex;
+  flex: 1;
+  border-right: 10px solid;
+  border-image: linear-gradient(to left, #777, #bbb, #777) 1 100%;
+  color: #dddddd;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.note-fret:first-child {
+  background: #555555;
+  min-width: 76px;
+  border-right: 12px solid black;
+  border-image: linear-gradient(to left, #E3DAC8, lightgoldenrodyellow, #E3DAC8) 1 100%;
+  flex-grow: 0;
+  flex-shrink:0;
+}
+
+.note-fret:before {
+  content: attr(data-note);
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  line-height: 33px;
+  text-align: center;
+  background: var(--fret-before-background);
+  z-index: 2;
+  color: #eee;
+  opacity: var(--note-opacity);
+}
+
+.single-fretmark:after, .double-fretmark:before, .double-fretmark:after {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #806233;
+}
+
+.single-fretmark:after {
+  top: calc(var(--fretboard-height) / 2 * 1px);
+  transform: translate(0, -50%);
+}
+
+.double-fretmark:before {
+  top: calc(var(--double-fretmark-position-1) * 1px);
+  transform: translate(-140%, -50%);
+}
+
+.double-fretmark:after {
+  top: calc(var(--double-fretmark-position-1) * 5 * 1px);
+  transform: translate(-140%, -50%);
+}
+
+.display-none {
+  display: none;
+}
+
+.settings {
+    display: flex;
+    align-self: right;
+    color: var(--titles-color);
+    background-color: var(--background-color);
+    border-bottom: 1px var(--background-color);
+    padding-left: 15px;
+    font-weight: bold;
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.number-of-frets {
+  padding-left: 10px;
+}
+
+label {
+    margin: 0 10px;
+}
+
+hr {
+    margin-right: 5%;
+    margin-left: 5%;
+    border-top: solid 2px var(--dark-accents-color);
+    background-color: var(--dark-accents-color);
+    border-radius: 5px;
+}
+
+.starting-note {
+    background:#FF6663;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    line-height: 25px;
+    text-align: center;
+    color: #eee;
+    display: inline-block;
+    padding: 5px;
+}
+
+.block_container
+{
+    text-align:left;
+}
+
+/*Styling layout of scales and chords columns starts here*/
+.flex-container {
+    display: flex;
+    padding-top: 15px;
+}
+
+.flex-child {
+    flex: 1;
+    border: none;
+    border-radius: 50%;
+}
+
+.flex-child:first-child {
+    margin-right: 15px;
+    flex-grow: 2;
+}
+
+/*Styling layout of index page starts here*/
+
+.flex-index {
+    flex: 1;
+    border: none;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.flex-child:first-child {
+    flex-grow: 2;
+    margin-left: 15px;
+
+}
+
+/*Styling chord area starts here*/
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-gap: 1rem;
+}
+
+.grid > div {
+  background: var(--dark-accents-color);
+  padding: 1rem;
+  border-radius: 15%;
+}
+
+.grid > div::before {
+  content: "";
+  padding-bottom: 100%;
+  display: block;
+  border-radius: 15%;
+}
+
+/*Styling front page search box*/
+.search-div {
+    border-radius: 15%;
+    text-align: center;
+    justify-content: center;
+    padding-top: 140px;
+    width: 20%;
+}
+
+.search-box {
+    border-radius: 5px;
+    height: 35px;
+    width: 30%;
+    margin : 0 auto;
+    /*justify-content: center;*/
+    background: url(images/lglass.png) no-repeat scroll 7px 7px white;
+    /*background: url(images/loading.gif) 10px 10px no-repeat white;*/
+    padding-left: 30px;
+    background-size: 20px;
+    text-indent: 5px;
+}
+
+#result {
+    border: 1px solid #ccc;
+    width: 32%;
+    margin : 0 auto;
+}
+
+#result ul {
+    list-style: none;
+    padding-left: 5px;
+    font-size: 15px;
+    text-align: left;
+}
+
+#result li {
+    padding: 3px;
+}
+
+#result ul li:hover {
+    background: #eee;
+}
+
+#result a {
+    color: #333333;
+}
+
+/*Styling chord selector area*/
+
+.chord-selector {
+    color: var(--background-color);
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.chord-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+    height: 100%;
+    padding-left: 15px;
+    text-align: center;
+}
+
+.chord-grid > div {
+    background: var(--main-color);
+    padding: 5px;
+    border-radius: 5px;
+    color: var(--background-color);
+    width: 100%;
+    justify-content: center;
+}
+
+.chord-grid > div > button {
+    width: 70%;
+    position: relative;
+    left: 15%;
+}
+
+.chord-grid > div > button:hover {
+    background-color: #ddd;
+}
+
+div > button {
+    border-radius: 5px;
+    border: none;
+    margin: 2px;
+    padding: 5px;
+}
+
+.block_container {
+    padding-top: 10px
+}
+
+/*Styling select box*/
+.select-css {
+	display: block;
+	font-size: 16px;
+	font-family: sans-serif;
+	font-weight: 700;
+	color: #444;
+	line-height: 1.3;
+	padding: .6em 1.4em .5em .8em;
+	box-sizing: border-box;
+	margin: 0;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+	border-radius: .5em;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #fff;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+	  linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+	background-repeat: no-repeat, repeat;
+	background-position: right .7em top 50%, 0 0;
+	background-size: .65em auto, 100%;
+}
+.select-css::-ms-expand {
+	display: none;
+}
+.select-css:hover {
+	border-color: #888;
+}
+.select-css:focus {
+	border-color: #aaa;
+	box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+	box-shadow: 0 0 0 3px -moz-mac-focusring;
+	color: #222;
+	outline: none;
+}
+.select-css option {
+	font-weight:normal;
+}
+
+
+/*TESTING*/
+
+/* Customize the label (the checkbox-container) */
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: normal;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    border: solid 1px;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: white;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.chord-button {
+    color: var(--titles-color);
+    font-size: 15px;
+    font-family: Arial, Arial, sans-serif;
+}
+
+h2 h3 h4 {
+    color: var(--titles-color);
+    font-family: Arial, Arial, sans-serif;
+}
+
+h3 {
+    font-size: 22px;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 30px;
+    font-weight: normal;
+}
+
+h4 {
+    font-size: 17px;
+}
+
+#trackDiv {
+    position:absolute;
+    top: 20px;
+    right: 50px;
+    display: compact;
+}
+
+.move-down {
+    padding-top: 45px;
+}
+
+#result {
+    background-color: white;
+}
+
+#loading > img {
+    width: 75px;
+    height: 75px;
+    left:0;
+    top:0;
+}
