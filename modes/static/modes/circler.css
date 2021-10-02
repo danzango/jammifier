@@ -47,18 +47,25 @@ body {
     margin-bottom: -35px;
 }
 
-footer {
+.footer {
     text-align: center;
     background-color: var(--dark-accents-color);
     color: var(--background-color);
     padding: 2px;
     margin-top: 50px;
-    margin-bottom: 0%;
 }
 
-.footer,
-.push {
-  height: 35px;
+html, body {
+    height: 100%;
+}
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
+}
+.footer, .push {
+    height: 142px; /* .push must be the same height as .footer */
 }
 
 footer a {
