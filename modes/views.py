@@ -105,8 +105,8 @@ def song(request, track_id):
     # Loving is easy: 5EYi2rH4LYs6M21ZLOyQTx
     # Pinegrove: 6m1vXqsfgF4p0mvxzQ1eQA
 
-    sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id='0fbfe9612d1e4314a63dd1a1203f8054',
-                                                                             client_secret='45ffeacde8d04221bb287876f504a238'))
+    sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id='redacted',
+                                                                             client_secret='redacted'))
     urn = 'spotify:track:' + track_id
     song_details = sp.audio_analysis(urn)
     artist_info = sp.track(urn)
@@ -122,8 +122,8 @@ def song(request, track_id):
     })
 
 def suggest(request, search_string):
-    sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id='0fbfe9612d1e4314a63dd1a1203f8054',
-                                                                   client_secret='45ffeacde8d04221bb287876f504a238'))
+    sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id='redacted',
+                                                                   client_secret='redacted'))
     results = sp.search(q=search_string, type="track", limit=5)
     results_list = []
 
