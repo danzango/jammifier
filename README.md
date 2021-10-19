@@ -10,5 +10,7 @@ From the main page:
 
 ## About
 - Uses Django for the backend
+- Uses mingus to get relative keys, scales, and chords: https://bspaans.github.io/python-mingus/
+- Uses spotipy to search for songs and get predicted keys for songs: https://spotipy.readthedocs.io/en/2.19.0/
 - Uses Javascript to display a fretboard for different instruments, and show different scales and chords on the fretboard3
-- Using spotipy to search for songs and get predicted keys for songs
+
