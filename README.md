@@ -2,7 +2,7 @@
 
 ## https://jammifier.pythonanywhere.com/
 
-An app to jam with your friends and learn some music theory!
+An app to jam to your favorite songs and learn some music theory!
 
 From the main page:
 - Click on the wheel menu to select a major key and view its different modes
