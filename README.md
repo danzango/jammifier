@@ -7,7 +7,7 @@ An app to jam to your favorite songs and learn some music theory!
 From the main page:
 - Click on the wheel menu to select a major key and view its different modes
 - Or type in a song name and click on it
--- This will take you to the key and its relative major/minor for the song
+- - This will take you to the key and its relative major/minor for the song
 
 ## About
 - Uses Django for the backend
